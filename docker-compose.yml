@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  jump:
+    restart: always
+    image: whatwewant/inlets:${SERVICE_JUMP_VERSION}
+    network_mode: host
+    command: inlets forward
+    environment:
+      TZ: Asia/Shanghai
+    volumes:
+      - ${SERVICE_JUMP_CONFIG}:/root/.config/inlets.yml
+
+networks:
+  default:
+    external: true
+    name: compose-ingress
