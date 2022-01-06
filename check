@@ -1,0 +1,17 @@
+#!/bin/bash
+
+load inquirer
+
+check() {
+  if [ ! -f $SERVICE_CONFIG ]; then
+     touch $SERVICE_CONFIG
+  fi
+  config::load_file $SERVICE_CONFIG
+
+  if [ ! -f $SERVICE_JUMP_CONFIG ]; then
+    log::error "[jump] cannot found config in $SERVICE_JUMP_CONFIG"
+    exit 1
+  fi
+}
+
+check $@
